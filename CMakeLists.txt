@@ -6,6 +6,8 @@ set(CMAKE_C_STANDARD 11)
 add_library(xorgui STATIC
         include/XORGUI/xorgui.c
         include/XORGUI/xorgui.h
+        include/XORGUI/checklist.c
+        include/XORGUI/checklist.h
         include/XORGUI/makeRect.c
         include/XORGUI/makeRect.h
         include/XORGUI/checkbox.c

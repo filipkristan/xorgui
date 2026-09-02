@@ -15,7 +15,7 @@ Progress:
 - [X] Label
 - [X] Button
 - [X] Checkbox
-- [ ] Checklist
+- [X] Checklist
 - [ ] Radio button
 - [ ] Text field
 - [ ] Slider

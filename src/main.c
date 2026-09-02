@@ -9,15 +9,18 @@ Checkbox checkboxesArray[17];
 
 // (Example) Make a function that draws everything you want and will be later used as a parameter in update_loop();
 void drawElements(Display *display, GC gc, Window win) {
-    drawAllArrayLabels(labelArray, NUMBER_OF_BUTTONS_MAX);
-    drawAllArrayButtons(buttonsArray, NUMBER_OF_BUTTONS_MAX);
-    drawAllArrayCheckboxes(checkboxesArray, NUMBER_OF_BUTTONS_MAX);
+    //drawAllArrayLabels(labelArray, NUMBER_OF_BUTTONS_MAX);
+    //drawAllArrayButtons(buttonsArray, NUMBER_OF_BUTTONS_MAX);
+    // drawAllArrayCheckboxes(checkboxesArray, NUMBER_OF_BUTTONS_MAX);
+    drawAllArrayChecklists(checkboxesArray, 5, display, win, gc, 5, 5, 120, 190, "Checklist", 60);
 }
 
 // (Example) Make a function that updates everything you want and will be later used as a parameter in update_loop();
 void updateElements(Display *display, GC gc, Window win, XEvent ev) {
-    updateAllArrayButtons(buttonsArray, ( MousePos){ev.xbutton.x, ev.xbutton.y}, NUMBER_OF_BUTTONS_MAX);
-    updateAllArrayCheckboxes(checkboxesArray, ( MousePos){ev.xbutton.x, ev.xbutton.y}, NUMBER_OF_BUTTONS_MAX);
+    //updateAllArrayButtons(buttonsArray, (MousePos){ev.xbutton.x, ev.xbutton.y}, NUMBER_OF_BUTTONS_MAX);
+    //updateAllArrayCheckboxes(checkboxesArray, (MousePos){ev.xbutton.x, ev.xbutton.y}, NUMBER_OF_BUTTONS_MAX);
+    updateAllArrayChecklists(checkboxesArray, (MousePos){ev.xbutton.x, ev.xbutton.y}, 5, display, win, gc, 5, 5, 120,
+                             190, 60);
 }
 
 int main(void) {
