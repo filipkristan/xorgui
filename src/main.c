@@ -33,6 +33,7 @@ int main(void) {
     Window win = XCreateSimpleWindow(display, RootWindow(display, screen), 0, 0, 1280, 720, 1,
                                      BlackPixel(display, screen), WhitePixel(display, screen));
     XMapWindow(display, win); // Maps the window
+    XStoreName(display, win, "Xorgui");
     XSelectInput(display, win, ButtonPressMask | ButtonReleaseMask | ExposureMask);
     XWindowAttributes xwa;
     XGetWindowAttributes(display, win, &xwa);
