@@ -29,7 +29,6 @@ int main(void) {
     if (!display) { fprintf(stderr, "Cannot open display\n"); }
     int screen = DefaultScreen(display);
     int buttonWidth = 120, buttonHeight = 40, starterX = 5, starterY = 5; // label/button/checkbox stuff
-    MousePos mouse = {0, 0};
     Window win = XCreateSimpleWindow(display, RootWindow(display, screen), 0, 0, 1280, 720, 1,
                                      BlackPixel(display, screen), WhitePixel(display, screen));
     XMapWindow(display, win); // Maps the window
@@ -38,7 +37,6 @@ int main(void) {
     XWindowAttributes xwa;
     XGetWindowAttributes(display, win, &xwa);
     GC gc = DefaultGC(display, screen);
-
     XFlush(display);
     XEvent ev;
 
