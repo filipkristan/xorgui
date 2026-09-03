@@ -1,6 +1,6 @@
 #include "checklist.h"
 
-void drawAllArrayChecklists(Checkbox *entry, int arrayEntriesNumber, Display *dpy, Window win, GC gc, int x, int y,
+void drawChecklistFrom(Checkbox *entry, int arrayEntriesNumber, Display *dpy, Window win, GC gc, int x, int y,
                             int w, int h, char *checklistTitle, int checkboxHeight) {
     XDrawRectangle(dpy, win, gc, x, y, w, h);
     XDrawRectangle(dpy, win, gc, x, y, w, checkboxHeight / 3);
@@ -16,7 +16,7 @@ void drawAllArrayChecklists(Checkbox *entry, int arrayEntriesNumber, Display *dp
     }
 }
 
-void updateAllArrayChecklists(Checkbox *entry, MousePos mpos, int arrayEntriesNumber, Display *dpy, Window win, GC gc,
+void updateChecklistFrom(Checkbox *entry, MousePos mpos, int arrayEntriesNumber, Display *dpy, Window win, GC gc,
                               int x, int y, int w, int h, int checkboxHeight) {
     for (int i = 0; i < arrayEntriesNumber; ++i) {
         int y_padding = 30 + checkboxHeight / 2 * i;

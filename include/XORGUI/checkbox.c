@@ -15,14 +15,14 @@ void checkbox(Display *display, GC gc, Window win, int x, int y, int w, int h, c
     }
 }
 
-void drawAllArrayCheckboxes(Checkbox *entry, int arrayEntriesNumber) {
+void drawCheckboxesFrom(Checkbox *entry, int arrayEntriesNumber) {
     for (int i = 0; i < arrayEntriesNumber; ++i) {
         checkbox(entry[i].display, entry[i].gc, entry[i].win, entry[i].x, entry[i].y, entry[i].w, entry[i].h,
                  entry[i].label, entry[i].drawOutline, entry[i].isChecked, entry[i].labelPos);
     }
 }
 
-void updateAllArrayCheckboxes(Checkbox *entry, MousePos mpos, int arrayEntriesNumber) {
+void updateCheckboxesFrom(Checkbox *entry, MousePos mpos, int arrayEntriesNumber) {
     for (int i = 0; i < arrayEntriesNumber; ++i) {
         // TODO: fix hardcoded value
         if (isMouseCollidingWithRect(mpos.x, mpos.y, entry[i].x, entry[i].y, entry[i].w, entry[i].h)) {

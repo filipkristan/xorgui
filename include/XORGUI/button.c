@@ -6,14 +6,14 @@ void button(Display *display, GC gc, Window win, int x, int y, int w, int h, cha
     XFlush(display);
 }
 
-void drawAllArrayButtons(Button *entry, int arrayEntriesNumber) {
+void drawButtonsFrom(Button *entry, int arrayEntriesNumber) {
     for (int i = 0; i < arrayEntriesNumber; ++i) {
         button(entry[i].display, entry[i].gc, entry[i].win, entry[i].x, entry[i].y, entry[i].w, entry[i].h,
                    entry[i].label, entry[i].drawOutline, entry[i].labelPos);
     }
 }
 
-void updateAllArrayButtons(Button *entry, MousePos mpos, int arrayEntriesNumber) {
+void updateButtonsFrom(Button *entry, MousePos mpos, int arrayEntriesNumber) {
     for (int i = 0; i < arrayEntriesNumber; ++i) {
         // TODO: fix hardcoded value
         if (isMouseCollidingWithRect(mpos.x, mpos.y, entry[i].x, entry[i].y, entry[i].w, entry[i].h)) {
