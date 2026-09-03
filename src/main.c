@@ -12,14 +12,14 @@ void drawElements(Display *display, GC gc, Window win) {
     //drawAllArrayLabels(labelArray, NUMBER_OF_BUTTONS_MAX);
     //drawAllArrayButtons(buttonsArray, NUMBER_OF_BUTTONS_MAX);
     // drawAllArrayCheckboxes(checkboxesArray, NUMBER_OF_BUTTONS_MAX);
-    drawAllArrayChecklists(checkboxesArray, 5, display, win, gc, 5, 5, 120, 190, "Checklist", 60);
+    drawChecklistFrom(checkboxesArray, 5, display, win, gc, 5, 5, 120, 190, "Checklist", 60);
 }
 
 // (Example) Make a function that updates everything you want and will be later used as a parameter in update_loop();
 void updateElements(Display *display, GC gc, Window win, XEvent ev) {
     //updateAllArrayButtons(buttonsArray, (MousePos){ev.xbutton.x, ev.xbutton.y}, NUMBER_OF_BUTTONS_MAX);
     //updateAllArrayCheckboxes(checkboxesArray, (MousePos){ev.xbutton.x, ev.xbutton.y}, NUMBER_OF_BUTTONS_MAX);
-    updateAllArrayChecklists(checkboxesArray, (MousePos){ev.xbutton.x, ev.xbutton.y}, 5, display, win, gc, 5, 5, 120,
+    updateChecklistFrom(checkboxesArray, (MousePos){ev.xbutton.x, ev.xbutton.y}, 5, display, win, gc, 5, 5, 120,
                              190, 60);
 }
 
@@ -29,7 +29,6 @@ int main(void) {
     if (!display) { fprintf(stderr, "Cannot open display\n"); }
     int screen = DefaultScreen(display);
     int buttonWidth = 120, buttonHeight = 40, starterX = 5, starterY = 5; // label/button/checkbox stuff
-    MousePos mouse = {0, 0};
     Window win = XCreateSimpleWindow(display, RootWindow(display, screen), 0, 0, 1280, 720, 1,
                                      BlackPixel(display, screen), WhitePixel(display, screen));
     XMapWindow(display, win); // Maps the window
@@ -38,7 +37,6 @@ int main(void) {
     XWindowAttributes xwa;
     XGetWindowAttributes(display, win, &xwa);
     GC gc = DefaultGC(display, screen);
-
     XFlush(display);
     XEvent ev;
 

@@ -20,8 +20,8 @@ typedef struct Button {
 // Add button to array?
 void button(Display *display, GC gc, Window win, int x, int y, int w, int h, char *labelText, bool drawOutline, char *labelPos);
 
-void drawAllArrayButtons(Button *entry, int arrayEntriesNumber);
+void drawButtonsFrom(Button *entry, int arrayEntriesNumber);
 
-void updateAllArrayButtons(Button *entry, MousePos mpos, int arrayEntriesNumber);
+void updateButtonsFrom(Button *entry, MousePos mpos, int arrayEntriesNumber);
 
 #endif

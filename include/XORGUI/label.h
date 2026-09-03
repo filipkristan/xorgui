@@ -19,6 +19,6 @@ typedef struct Label {
 
 void label(Display *display, GC gc, Window win, int x, int y, int w, int h, char *labelText, bool drawOutline, char *labelPos);
 
-void drawAllArrayLabels(Label *entry, int arrayEntriesNumber);
+void drawLabelsFrom(Label *entry, int arrayEntriesNumber);
 
 #endif
