@@ -35,6 +35,6 @@ You can also modify src/main.c to test out the library.
 
 ## Images
 
-Checklist
-
-![alt text](img/20260905-checklist.png "Checklist")
+Checklist | Radio Button
+:-:|:-:
+![alt text](img/20260905-checklist.png "Checklist") | ![alt text](img/20260905-radiobutton.png)
