@@ -12,7 +12,7 @@ void drawElements(Display *display, GC gc, Window win) {
     //drawAllArrayLabels(labelArray, NUMBER_OF_BUTTONS_MAX);
     //drawAllArrayButtons(buttonsArray, NUMBER_OF_BUTTONS_MAX);
     // drawAllArrayCheckboxes(checkboxesArray, NUMBER_OF_BUTTONS_MAX);
-    drawRadioButtonFrom(checkboxesArray, 5, display, win, gc, 5, 5, 120, 190, "Checklist", 60);
+    drawRadioButtonFrom(checkboxesArray, 5, display, win, gc, 5, 5, 120, 190, "Radio Button", 60);
 }
 
 // (Example) Make a function that updates everything you want and will be later used as a parameter in update_loop();
