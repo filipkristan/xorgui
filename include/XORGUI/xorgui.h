@@ -7,5 +7,6 @@
 #include "update.h"
 #include "checkbox.h"
 #include "checklist.h"
+#include "radiobutton.h"
 
 #endif

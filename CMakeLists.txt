@@ -20,6 +20,8 @@ add_library(xorgui STATIC
         include/XORGUI/label.h
         include/XORGUI/misc.h
         include/XORGUI/misc.c
+        include/XORGUI/radiobutton.c
+        include/XORGUI/radiobutton.h
 )
 
 target_include_directories(xorgui PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)

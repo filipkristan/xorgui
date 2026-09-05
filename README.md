@@ -1,7 +1,8 @@
 # The XORGUI Widget Toolkit (For X11)
 
 A simple and minimalistic widget toolkit for X11, based on Xlib.  
-The aim is to create a small widget toolkit that uses the least resources possible.
+The aim is to create a small widget toolkit that uses the least resources possible.  
+I'm currently focusing on the functionality, a graphical overhaul will come later.
 
 ## Install the library to your system
 
@@ -16,7 +17,7 @@ Progress:
 - [X] Button
 - [X] Checkbox
 - [X] Checklist
-- [ ] Radio button
+- [X] Radio button
 - [ ] Text field
 - [ ] Slider
 - [ ] List
@@ -31,3 +32,9 @@ You can also modify src/main.c to test out the library.
 
 ## NOTES:
 - CLion users should press the hammer button instead of the play button to compile.
+
+## Images
+
+Checklist | Radio Button
+:-:|:-:
+![alt text](img/20260905-checklist.png "Checklist") | ![alt text](img/20260905-radiobutton.png)
