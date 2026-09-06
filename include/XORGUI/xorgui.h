@@ -6,6 +6,7 @@
 #include "button.h"
 #include "update.h"
 #include "checkbox.h"
+#include "textfield.h"
 #include "checklist.h"
 #include "radiobutton.h"
 
