@@ -2,10 +2,12 @@
 
 void TextFieldKeyUpdate(Display *display, XEvent ev, KeySym ks, TextField *entry, int arrayEntriesNumber) {
     for (int i = 0; i < arrayEntriesNumber; ++i) {
-        if (entry[i].captureInput == true) {
+        if (entry[i].captureInput == true && strcmp(XKeysymToString(ks), "BackSpace") != 0) {
             char temp2[4096]; // TODO: Get the right size
             snprintf(temp2, sizeof(temp2), "%s", entry[i].label);
             snprintf(entry[i].label, sizeof(entry[i].label), "%s%s", temp2, XKeysymToString(ks));
+        } else if (entry[i].captureInput == true && strcmp(XKeysymToString(ks), "BackSpace") == 0) {
+            entry[i].label[strlen(entry[i].label) - 1] = '\0';
         }
     }
 }
