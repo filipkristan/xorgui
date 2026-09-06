@@ -6,21 +6,26 @@ int NUMBER_OF_BUTTONS_MAX = 17;
 Button buttonsArray[17];
 Label labelArray[17];
 Checkbox checkboxesArray[17];
+TextField textfieldsArray[17]; // NOTE: Demo & hardcoded
+KeySym ks;
 
 // (Example) Make a function that draws everything you want and will be later used as a parameter in update_loop();
 void drawElements(Display *display, GC gc, Window win) {
     //drawAllArrayLabels(labelArray, NUMBER_OF_BUTTONS_MAX);
     //drawAllArrayButtons(buttonsArray, NUMBER_OF_BUTTONS_MAX);
-    // drawAllArrayCheckboxes(checkboxesArray, NUMBER_OF_BUTTONS_MAX);
-    drawRadioButtonFrom(checkboxesArray, 5, display, win, gc, 5, 5, 120, 190, "Radio Button", 60);
+    //drawAllArrayCheckboxes(checkboxesArray, NUMBER_OF_BUTTONS_MAX);
+    //drawRadioButtonFrom(checkboxesArray, 5, display, win, gc, 5, 5, 120, 190, "Radio Button", 60);
+    //drawButtonsFrom(buttonsArray, NUMBER_OF_BUTTONS_MAX);
+    drawTextFieldsFrom(textfieldsArray, NUMBER_OF_BUTTONS_MAX);
 }
 
 // (Example) Make a function that updates everything you want and will be later used as a parameter in update_loop();
 void updateElements(Display *display, GC gc, Window win, XEvent ev) {
     //updateAllArrayButtons(buttonsArray, (MousePos){ev.xbutton.x, ev.xbutton.y}, NUMBER_OF_BUTTONS_MAX);
     //updateAllArrayCheckboxes(checkboxesArray, (MousePos){ev.xbutton.x, ev.xbutton.y}, NUMBER_OF_BUTTONS_MAX);
-    updateRadioButtonFrom(checkboxesArray, (MousePos){ev.xbutton.x, ev.xbutton.y}, 5, display, win, gc, 5, 5, 120,
-                             190, 60);
+    //updateRadioButtonFrom(checkboxesArray, (MousePos){ev.xbutton.x, ev.xbutton.y}, 5, display, win, gc, 5, 5, 120,190, 60);
+    //updateButtonsFrom(buttonsArray, (MousePos){ev.xbutton.x, ev.xbutton.y}, NUMBER_OF_BUTTONS_MAX);
+    updateTextFieldsFrom(textfieldsArray, (MousePos){ev.xbutton.x, ev.xbutton.y}, NUMBER_OF_BUTTONS_MAX, ks);
 }
 
 int main(void) {
@@ -33,13 +38,13 @@ int main(void) {
                                      BlackPixel(display, screen), WhitePixel(display, screen));
     XMapWindow(display, win); // Maps the window
     XStoreName(display, win, "Xorgui");
-    XSelectInput(display, win, ButtonPressMask | ButtonReleaseMask | ExposureMask);
+    XSelectInput(display, win, ButtonPressMask | ButtonReleaseMask | ExposureMask | KeyPressMask | KeyReleaseMask);
     XWindowAttributes xwa;
     XGetWindowAttributes(display, win, &xwa);
     GC gc = DefaultGC(display, screen);
     XFlush(display);
     XEvent ev;
-
+    //KeySym ks = 0;
     // Set widgets for demonstration
     for (int i = 0; i < NUMBER_OF_BUTTONS_MAX; ++i) {
         labelArray[i].display = display;
@@ -78,9 +83,22 @@ int main(void) {
         checkboxesArray[i].isChecked = false;
         checkboxesArray[i].labelPos = "right";
     }
+    for (int i = 0; i < NUMBER_OF_BUTTONS_MAX; ++i) {
+        textfieldsArray[i].display = display;
+        textfieldsArray[i].win = win;
+        textfieldsArray[i].gc = gc;
+        textfieldsArray[i].x = starterX + (buttonWidth + 5) * i * 4;
+        textfieldsArray[i].y = starterY * 4;
+        textfieldsArray[i].w = buttonWidth * 4;
+        textfieldsArray[i].h = buttonHeight * 4;
+        strcpy(textfieldsArray[i].label, "Text Field");
+        textfieldsArray[i].drawOutline = true;
+        textfieldsArray[i].labelPos = "right";
+        textfieldsArray[i].captureInput = false;
+    }
 
     // This is a loop that checks for key presses and updates
     // To draw or update elements you have to make a function that does so and insert it as a argument
-    update_loop(display, gc, win, ev, drawElements, drawElements, updateElements);
+    update_loop(display, gc, win, ev, drawElements, drawElements, updateElements, ks);
     return 0;
 }
