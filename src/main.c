@@ -93,7 +93,7 @@ int main(void) {
         textfieldsArray[i].h = buttonHeight * 4;
         strcpy(textfieldsArray[i].label, "Text Field");
         textfieldsArray[i].drawOutline = true;
-        textfieldsArray[i].labelPos = "right";
+        textfieldsArray[i].labelPos = "top-left";
         textfieldsArray[i].captureInput = false;
     }
 
