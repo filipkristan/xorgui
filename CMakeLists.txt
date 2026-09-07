@@ -4,6 +4,8 @@ project(xorgui C)
 set(CMAKE_C_STANDARD 11)
 
 add_library(xorgui STATIC
+        include/XORGUI/progressbar.c
+        include/XORGUI/progressbar.h
         include/XORGUI/radiobutton.c
         include/XORGUI/radiobutton.h
         include/XORGUI/textfield.c

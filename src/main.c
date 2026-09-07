@@ -10,7 +10,7 @@ TextField textfieldsArray[17]; // NOTE: Demo & hardcoded
 KeySym ks;
 
 // (Example) Make a function that draws everything you want and will be later used as a parameter in update_loop();
-void drawElements(Display *display, GC gc, Window win) {
+static void drawElements(Display *display, GC gc, Window win) {
     drawLabelsFrom(labelArray, NUMBER_OF_BUTTONS_MAX);
     drawButtonsFrom(buttonsArray, NUMBER_OF_BUTTONS_MAX);
     drawCheckboxesFrom(checkboxesArray, NUMBER_OF_BUTTONS_MAX);
@@ -18,14 +18,15 @@ void drawElements(Display *display, GC gc, Window win) {
     drawChecklistFrom(checkboxesArray, 5, display, win, gc, 5, 5 + 320, 120, 190, "Radio Button", 60);
     drawButtonsFrom(buttonsArray, NUMBER_OF_BUTTONS_MAX);
     drawTextFieldsFrom(textfieldsArray, NUMBER_OF_BUTTONS_MAX);
+    drawProgressBar(display, gc, win, 130, 325, 370, 40, 888, 1337);
 }
 
 // (Example) Make a function that updates everything you want and will be later used as a parameter in update_loop();
-void updateElements(Display *display, GC gc, Window win, XEvent ev) {
+static void updateElements(Display *display, GC gc, Window win, XEvent ev) {
     updateButtonsFrom(buttonsArray, (MousePos){ev.xbutton.x, ev.xbutton.y}, NUMBER_OF_BUTTONS_MAX);
     updateCheckboxesFrom(checkboxesArray, (MousePos){ev.xbutton.x, ev.xbutton.y}, NUMBER_OF_BUTTONS_MAX);
     updateChecklistFrom(checkboxesArray, (MousePos){ev.xbutton.x, ev.xbutton.y}, 5, display, win, gc, 5, 5 + 320, 120,
-                          190, 60);
+                        190, 60);
     updateButtonsFrom(buttonsArray, (MousePos){ev.xbutton.x, ev.xbutton.y}, NUMBER_OF_BUTTONS_MAX);
     updateTextFieldsFrom(textfieldsArray, (MousePos){ev.xbutton.x, ev.xbutton.y}, NUMBER_OF_BUTTONS_MAX, ks);
 }

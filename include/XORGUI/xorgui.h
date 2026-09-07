@@ -8,6 +8,7 @@
 #include "checkbox.h"
 #include "textfield.h"
 #include "checklist.h"
+#include "progressbar.h"
 #include "radiobutton.h"
 
 #endif
