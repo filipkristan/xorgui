@@ -14,7 +14,7 @@ typedef struct TextField {
     int h;
     char label[4096];
     bool drawOutline;
-    char *labelPos;
+    char labelPos[16];
     bool captureInput;
 } TextField;
 

@@ -15,11 +15,11 @@ typedef struct Checkbox {
     char *label;
     bool drawOutline;
     bool isChecked;
-    char *labelPos;
+    char labelPos[16];
 } Checkbox;
 
 void checkbox(Display *display, GC gc, Window win, int x, int y, int w, int h, char *labelText, bool drawOutline,
-              bool isChecked, char *labelPos);
+              bool isChecked, char labelPos[16]);
 
 void drawCheckboxesFrom(Checkbox *entry, int arrayEntriesNumber);
 

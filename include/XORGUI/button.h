@@ -14,11 +14,11 @@ typedef struct Button {
     int h;
     char *label;
     bool drawOutline;
-    char *labelPos;
+    char labelPos[16];
 } Button;
 
 // Add button to array?
-void button(Display *display, GC gc, Window win, int x, int y, int w, int h, char *labelText, bool drawOutline, char *labelPos);
+void button(Display *display, GC gc, Window win, int x, int y, int w, int h, char *labelText, bool drawOutline, char labelPos[16]);
 
 void drawButtonsFrom(Button *entry, int arrayEntriesNumber);
 

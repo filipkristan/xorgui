@@ -11,20 +11,22 @@ KeySym ks;
 
 // (Example) Make a function that draws everything you want and will be later used as a parameter in update_loop();
 void drawElements(Display *display, GC gc, Window win) {
-    //drawAllArrayLabels(labelArray, NUMBER_OF_BUTTONS_MAX);
-    //drawAllArrayButtons(buttonsArray, NUMBER_OF_BUTTONS_MAX);
-    //drawAllArrayCheckboxes(checkboxesArray, NUMBER_OF_BUTTONS_MAX);
-    //drawRadioButtonFrom(checkboxesArray, 5, display, win, gc, 5, 5, 120, 190, "Radio Button", 60);
-    //drawButtonsFrom(buttonsArray, NUMBER_OF_BUTTONS_MAX);
+    drawLabelsFrom(labelArray, NUMBER_OF_BUTTONS_MAX);
+    drawButtonsFrom(buttonsArray, NUMBER_OF_BUTTONS_MAX);
+    drawCheckboxesFrom(checkboxesArray, NUMBER_OF_BUTTONS_MAX);
+    // NOTE: Hardcoded x and y
+    drawChecklistFrom(checkboxesArray, 5, display, win, gc, 5, 5 + 320, 120, 190, "Radio Button", 60);
+    drawButtonsFrom(buttonsArray, NUMBER_OF_BUTTONS_MAX);
     drawTextFieldsFrom(textfieldsArray, NUMBER_OF_BUTTONS_MAX);
 }
 
 // (Example) Make a function that updates everything you want and will be later used as a parameter in update_loop();
 void updateElements(Display *display, GC gc, Window win, XEvent ev) {
-    //updateAllArrayButtons(buttonsArray, (MousePos){ev.xbutton.x, ev.xbutton.y}, NUMBER_OF_BUTTONS_MAX);
-    //updateAllArrayCheckboxes(checkboxesArray, (MousePos){ev.xbutton.x, ev.xbutton.y}, NUMBER_OF_BUTTONS_MAX);
-    //updateRadioButtonFrom(checkboxesArray, (MousePos){ev.xbutton.x, ev.xbutton.y}, 5, display, win, gc, 5, 5, 120,190, 60);
-    //updateButtonsFrom(buttonsArray, (MousePos){ev.xbutton.x, ev.xbutton.y}, NUMBER_OF_BUTTONS_MAX);
+    updateButtonsFrom(buttonsArray, (MousePos){ev.xbutton.x, ev.xbutton.y}, NUMBER_OF_BUTTONS_MAX);
+    updateCheckboxesFrom(checkboxesArray, (MousePos){ev.xbutton.x, ev.xbutton.y}, NUMBER_OF_BUTTONS_MAX);
+    updateChecklistFrom(checkboxesArray, (MousePos){ev.xbutton.x, ev.xbutton.y}, 5, display, win, gc, 5, 5 + 320, 120,
+                          190, 60);
+    updateButtonsFrom(buttonsArray, (MousePos){ev.xbutton.x, ev.xbutton.y}, NUMBER_OF_BUTTONS_MAX);
     updateTextFieldsFrom(textfieldsArray, (MousePos){ev.xbutton.x, ev.xbutton.y}, NUMBER_OF_BUTTONS_MAX, ks);
 }
 
@@ -56,7 +58,7 @@ int main(void) {
         labelArray[i].h = buttonHeight;
         labelArray[i].label = "Label";
         labelArray[i].drawOutline = true;
-        labelArray[i].labelPos = "left";
+        strcpy(labelArray[i].labelPos, "left");
     }
     for (int i = 0; i < NUMBER_OF_BUTTONS_MAX; ++i) {
         buttonsArray[i].display = display;
@@ -68,7 +70,7 @@ int main(void) {
         buttonsArray[i].h = buttonHeight;
         buttonsArray[i].label = "Button";
         buttonsArray[i].drawOutline = true;
-        buttonsArray[i].labelPos = "center";
+        strcpy(buttonsArray[i].labelPos, "center");
     }
     for (int i = 0; i < NUMBER_OF_BUTTONS_MAX; ++i) {
         checkboxesArray[i].display = display;
@@ -81,20 +83,20 @@ int main(void) {
         checkboxesArray[i].label = "Checkbox";
         checkboxesArray[i].drawOutline = true;
         checkboxesArray[i].isChecked = false;
-        checkboxesArray[i].labelPos = "right";
+        strcpy(checkboxesArray[i].labelPos, "left"); // NOTE: Maybe a checklist should ignore this?
     }
     for (int i = 0; i < NUMBER_OF_BUTTONS_MAX; ++i) {
         textfieldsArray[i].display = display;
         textfieldsArray[i].win = win;
         textfieldsArray[i].gc = gc;
         textfieldsArray[i].x = starterX + (buttonWidth + 5) * i * 4;
-        textfieldsArray[i].y = starterY * 4;
-        textfieldsArray[i].w = buttonWidth * 4;
+        textfieldsArray[i].y = starterY + 150;
+        textfieldsArray[i].w = buttonWidth * 4 + 3 * 5;
         textfieldsArray[i].h = buttonHeight * 4;
         strcpy(textfieldsArray[i].label, "Text Field");
         textfieldsArray[i].drawOutline = true;
-        textfieldsArray[i].labelPos = "top-left";
         textfieldsArray[i].captureInput = false;
+        strcpy(textfieldsArray[i].labelPos, "top-left");
     }
 
     // This is a loop that checks for key presses and updates
