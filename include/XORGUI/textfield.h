@@ -1,6 +1,9 @@
 #ifndef XORGUI_TEXTFIELD_H
 #define XORGUI_TEXTFIELD_H
 
+#include <X11/Xlib.h>
+#include <X11/Xutil.h>
+
 #include "misc.h"
 #include "button.h"
 
