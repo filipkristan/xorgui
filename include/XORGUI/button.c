@@ -1,7 +1,7 @@
 #include "button.h"
 
-void button(Display *display, GC gc, Window win, int x, int y, int w, int h, char *labelText, bool drawOutline,
-                char *labelPos) {
+void button(Display *display, GC gc, Window win, int x, int y, int w, int h, char labelText[64], bool drawOutline,
+                char labelPos[16]) {
     label(display, gc, win, x, y, w, h, labelText, drawOutline, labelPos);
     XFlush(display);
 }
@@ -18,7 +18,7 @@ void updateButtonsFrom(Button *entry, MousePos mpos, int arrayEntriesNumber) {
         // TODO: fix hardcoded value
         if (isMouseCollidingWithRect(mpos.x, mpos.y, entry[i].x, entry[i].y, entry[i].w, entry[i].h)) {
             entry[i].label = "Clicked!";
-            printf("Button pressed! \n");
+            //printf("Button pressed! \n");
             XFillRectangle(entry[i].display, entry[i].win, entry[i].gc, entry[i].x + entry[i].w - 16 - 16 / 2,
                            entry[i].y + entry[i].h / 2 - 16 / 2, 16, 16);
             fflush(stdout);

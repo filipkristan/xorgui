@@ -1,9 +1,33 @@
 #include "label.h"
 
-// Add button to array?
+// Enjoy the magic numbers! Most are related to text size in pixels anyway...
 void label(Display *display, GC gc, Window win, int x, int y, int w, int h, char *labelText, bool drawOutline,
-           char *labelPos) {
-    XDrawString(display, win, gc, x + 16 / 2, y + h / 2 + 5, labelText, strlen(labelText));
+           char labelPos[16]) {
+    if (strcmp(labelPos, "left") == 0) {
+        XDrawString(display, win, gc, x + 16 / 2, y + h / 2 + 5, labelText, strlen(labelText));
+    } else if (strcmp(labelPos, "top-left") == 0) {
+        XDrawString(display, win, gc, x + 8, y + 15, labelText, strlen(labelText));
+    } else if (strcmp(labelPos, "bottom-left") == 0) {
+        XDrawString(display, win, gc, x + 8, y + h - 8, labelText, strlen(labelText));
+    } else if (strcmp(labelPos, "right") == 0) {
+        XDrawString(display, win, gc, x + w - calcXlibTextWidth(labelText) - 5, y + h / 2 + 5, labelText,
+                    strlen(labelText));
+    } else if (strcmp(labelPos, "top-right") == 0) {
+        XDrawString(display, win, gc, x + w - calcXlibTextWidth(labelText) - 5, y + 15, labelText,
+                    strlen(labelText));
+    } else if (strcmp(labelPos, "bottom-right") == 0) {
+        XDrawString(display, win, gc, x + w - calcXlibTextWidth(labelText) - 5, y + h - 8, labelText,
+                    strlen(labelText));
+    } else if (strcmp(labelPos, "center") == 0) {
+        XDrawString(display, win, gc, x + w / 2 - calcXlibTextWidth(labelText) / 2, y + h / 2 + 5, labelText,
+                    strlen(labelText));
+    } else if (strcmp(labelPos, "top") == 0) {
+        XDrawString(display, win, gc, x + w / 2 - calcXlibTextWidth(labelText) / 2, y + 15, labelText,
+                    strlen(labelText));
+    } else if (strcmp(labelPos, "bottom") == 0) {
+        XDrawString(display, win, gc, x + w / 2 - calcXlibTextWidth(labelText) / 2, y + h - 8, labelText,
+                    strlen(labelText));
+    }
     if (drawOutline) {
         XDrawRectangle(display, win, gc, x, y, w, h);
     }

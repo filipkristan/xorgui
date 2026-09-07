@@ -18,12 +18,11 @@ Progress:
 - [X] Checkbox
 - [X] Checklist
 - [X] Radio button
-- [ ] Text field
-- [ ] Slider
+- [X] Text field
+- [X] Progress bar
 - [ ] List
+- [ ] Slider
 - [ ] Scrollbar
-- [ ] Progress bar
-- [ ] Double buffering
 
 ## Test out the library
 Test it out by building the project and running the *demo* provided.    

@@ -1,17 +1,17 @@
 cmake_minimum_required(VERSION 3.28)
 project(xorgui C)
 
-set(CMAKE_C_STANDARD 11)
+set(CMAKE_C_STANDARD 99)
 
 add_library(xorgui STATIC
+        include/XORGUI/progressbar.c
+        include/XORGUI/progressbar.h
         include/XORGUI/radiobutton.c
         include/XORGUI/radiobutton.h
         include/XORGUI/textfield.c
         include/XORGUI/textfield.h
         include/XORGUI/checklist.c
         include/XORGUI/checklist.h
-        include/XORGUI/makeRect.c
-        include/XORGUI/makeRect.h
         include/XORGUI/checkbox.c
         include/XORGUI/checkbox.h
         include/XORGUI/update.c
