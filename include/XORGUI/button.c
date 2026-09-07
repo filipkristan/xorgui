@@ -1,6 +1,6 @@
 #include "button.h"
 
-void button(Display *display, GC gc, Window win, int x, int y, int w, int h, char *labelText, bool drawOutline,
+void button(Display *display, GC gc, Window win, int x, int y, int w, int h, char labelText[64], bool drawOutline,
                 char labelPos[16]) {
     label(display, gc, win, x, y, w, h, labelText, drawOutline, labelPos);
     XFlush(display);

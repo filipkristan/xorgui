@@ -18,7 +18,7 @@ typedef struct Checkbox {
     char labelPos[16];
 } Checkbox;
 
-void checkbox(Display *display, GC gc, Window win, int x, int y, int w, int h, char *labelText, bool drawOutline,
+void checkbox(Display *display, GC gc, Window win, int x, int y, int w, int h, char labelText[64], bool drawOutline,
               bool isChecked, char labelPos[16]);
 
 void drawCheckboxesFrom(Checkbox *entry, int arrayEntriesNumber);

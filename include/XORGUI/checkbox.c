@@ -1,7 +1,7 @@
 #include "checkbox.h"
 
 // Make a checkbox
-void checkbox(Display *display, GC gc, Window win, int x, int y, int w, int h, char *labelText, bool drawOutline,
+void checkbox(Display *display, GC gc, Window win, int x, int y, int w, int h, char labelText[64], bool drawOutline,
               bool isChecked,
               char labelPos[16]) {
     int squareSize = 16;
@@ -27,7 +27,7 @@ void updateCheckboxesFrom(Checkbox *entry, MousePos mpos, int arrayEntriesNumber
         // TODO: fix hardcoded value
         if (isMouseCollidingWithRect(mpos.x, mpos.y, entry[i].x, entry[i].y, entry[i].w, entry[i].h)) {
             //printf("Checkbox pressed! \n");
-            fflush(stdout);
+            //fflush(stdout);
             entry[i].isChecked = !entry[i].isChecked;
             XClearWindow(entry[i].display, entry[i].win); // this fixes drawing over old text and more
         }

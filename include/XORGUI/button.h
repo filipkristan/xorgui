@@ -18,7 +18,8 @@ typedef struct Button {
 } Button;
 
 // Add button to array?
-void button(Display *display, GC gc, Window win, int x, int y, int w, int h, char *labelText, bool drawOutline, char labelPos[16]);
+void button(Display *display, GC gc, Window win, int x, int y, int w, int h, char labelText[64], bool drawOutline,
+            char labelPos[16]);
 
 void drawButtonsFrom(Button *entry, int arrayEntriesNumber);
 
