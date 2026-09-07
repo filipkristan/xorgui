@@ -12,8 +12,6 @@ add_library(xorgui STATIC
         include/XORGUI/textfield.h
         include/XORGUI/checklist.c
         include/XORGUI/checklist.h
-        include/XORGUI/makeRect.c
-        include/XORGUI/makeRect.h
         include/XORGUI/checkbox.c
         include/XORGUI/checkbox.h
         include/XORGUI/update.c

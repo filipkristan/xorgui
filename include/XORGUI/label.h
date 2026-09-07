@@ -1,7 +1,6 @@
 #ifndef XORGUI_LABEL_H
 #define XORGUI_LABEL_H
 
-#include "makeRect.h"
 #include "misc.h"
 
 typedef struct Label {
