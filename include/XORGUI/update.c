@@ -1,8 +1,11 @@
 #include "update.h"
 
-void update_loop(Display *display, GC gc, Window win, XEvent ev, void (*draw_notify)(Display *, GC, Window),
+void update_loop(Display *display, GC gc, Window win, XEvent ev,
+                 void (*draw_notify)(Display *, GC, Window),
                  void (*draw_after_pressing_button1)(Display *, GC, Window),
-                 void (*update_everything)(Display *, GC, Window, XEvent ev), KeySym ks) {
+                 void (*update_everything)(Display *, GC, Window, XEvent ev),
+                 void (*update_keys)(Display *, XEvent, KeySym, TextField *, int),
+                 KeySym ks) {
     XFlush(display);
     for (;;) {
         XNextEvent(display, &ev);
@@ -10,7 +13,7 @@ void update_loop(Display *display, GC gc, Window win, XEvent ev, void (*draw_not
             case KeyPress:
                 // Sure, XKeycodeToKeysym might be deprecated but i'm too lazy to do anything about it.
                 ks = XKeycodeToKeysym(display, ev.xkey.keycode, 0);
-                TextFieldKeyUpdate(display, ev, ks, textfieldsArray, 17); // TODO: Fix hardcoded value
+                update_keys(display, ev, ks, textfieldsArray, 17); // TODO: Fix hardcoded value
             case Expose:
                 // Displays after showing the window
                 XClearWindow(display, win);
@@ -26,7 +29,7 @@ void update_loop(Display *display, GC gc, Window win, XEvent ev, void (*draw_not
                     case Button1: // Left click
                         // update after necessary calculations were done
                         update_everything(display, gc, win, ev);
-                        draw_after_pressing_button1(display, gc, win); // draw after left clicking
+                        draw_after_pressing_button1(display, gc, win);
                         XSync(display, True);
                         break;
                     default:

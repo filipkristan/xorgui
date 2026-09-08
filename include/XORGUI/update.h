@@ -11,6 +11,8 @@ extern TextField textfieldsArray[17];
 void update_loop(Display *display, GC gc, Window win, XEvent ev,
                  void (*draw_notify)(Display *, GC, Window),
                  void (*draw_after_pressing_button1)(Display *, GC, Window),
-                 void (*update_everything)(Display *, GC, Window, XEvent ev), KeySym ks);
+                 void (*update_everything)(Display *, GC, Window, XEvent ev),
+                 void (*update_keys)(Display *, XEvent, KeySym, TextField *, int),
+                 KeySym ks);
 
 #endif

@@ -31,6 +31,11 @@ static void updateElements(Display *display, GC gc, Window win, XEvent ev) {
     updateTextFieldsFrom(textfieldsArray, (MousePos){ev.xbutton.x, ev.xbutton.y}, NUMBER_OF_BUTTONS_MAX, ks);
 }
 
+// (Example) Make a function that updates keys you want and will be later used as a parameter in update_loop();
+static void updateKeys(Display *display, XEvent ev, KeySym ks, TextField *entry, int arrayEntriesNumber) { // TODO: Remove unused "int arrayEntriesNumber"
+    TextFieldKeyUpdate(display, ev, ks, textfieldsArray, 17);
+}
+
 int main(void) {
     // Boilerplate and declarations
     Display *display = XOpenDisplay(NULL);
@@ -90,9 +95,9 @@ int main(void) {
         textfieldsArray[i].display = display;
         textfieldsArray[i].win = win;
         textfieldsArray[i].gc = gc;
-        textfieldsArray[i].x = starterX + (buttonWidth * 2 + 5) * i * 4; // Move 2nd text field off screen
+        textfieldsArray[i].x = starterX + (buttonWidth + 5) * i * 3;
         textfieldsArray[i].y = starterY + 150;
-        textfieldsArray[i].w = buttonWidth * 4 + 3 * 5;
+        textfieldsArray[i].w = buttonWidth * 3 + 2 * 5;
         textfieldsArray[i].h = buttonHeight * 4;
         strcpy(textfieldsArray[i].label, "Text Field");
         textfieldsArray[i].drawOutline = true;
@@ -102,6 +107,6 @@ int main(void) {
 
     // This is a loop that checks for key presses and updates
     // To draw or update elements you have to make a function that does so and insert it as a argument
-    update_loop(display, gc, win, ev, drawElements, drawElements, updateElements, ks);
+    update_loop(display, gc, win, ev, drawElements, drawElements, updateElements, updateKeys, ks);
     return 0;
 }
