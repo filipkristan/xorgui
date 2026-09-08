@@ -15,7 +15,7 @@ static void drawElements(Display *display, GC gc, Window win) {
     drawButtonsFrom(buttonsArray, NUMBER_OF_BUTTONS_MAX);
     drawCheckboxesFrom(checkboxesArray, NUMBER_OF_BUTTONS_MAX);
     // NOTE: Hardcoded x and y
-    drawChecklistFrom(checkboxesArray, 5, display, win, gc, 5, 5 + 320, 120, 190, "Radio Button", 60);
+    drawChecklistFrom(checkboxesArray, 5, display, win, gc, 5, 5 + 320, 120, 190, "Checklist", 60);
     drawButtonsFrom(buttonsArray, NUMBER_OF_BUTTONS_MAX);
     drawTextFieldsFrom(textfieldsArray, NUMBER_OF_BUTTONS_MAX);
     drawProgressBar(display, gc, win, 130, 325, 370, 40, 888, 1337);
@@ -37,7 +37,7 @@ int main(void) {
     if (!display) { fprintf(stderr, "Cannot open display\n"); }
     int screen = DefaultScreen(display);
     int buttonWidth = 120, buttonHeight = 40, starterX = 5, starterY = 5; // label/button/checkbox stuff
-    Window win = XCreateSimpleWindow(display, RootWindow(display, screen), 0, 0, 1280, 720, 1,
+    Window win = XCreateSimpleWindow(display, RootWindow(display, screen), 0, 0, 800, 600, 1,
                                      BlackPixel(display, screen), WhitePixel(display, screen));
     XMapWindow(display, win); // Maps the window
     XStoreName(display, win, "Xorgui");
@@ -81,7 +81,7 @@ int main(void) {
         checkboxesArray[i].y = starterY + 100;
         checkboxesArray[i].w = buttonWidth;
         checkboxesArray[i].h = buttonHeight;
-        checkboxesArray[i].label = "Checkbox";
+        checkboxesArray[i].label = "Radio Button";
         checkboxesArray[i].drawOutline = true;
         checkboxesArray[i].isChecked = false;
         strcpy(checkboxesArray[i].labelPos, "left"); // NOTE: Maybe a checklist should ignore this?
@@ -90,7 +90,7 @@ int main(void) {
         textfieldsArray[i].display = display;
         textfieldsArray[i].win = win;
         textfieldsArray[i].gc = gc;
-        textfieldsArray[i].x = starterX + (buttonWidth + 5) * i * 4;
+        textfieldsArray[i].x = starterX + (buttonWidth * 2 + 5) * i * 4; // Move 2nd text field off screen
         textfieldsArray[i].y = starterY + 150;
         textfieldsArray[i].w = buttonWidth * 4 + 3 * 5;
         textfieldsArray[i].h = buttonHeight * 4;

@@ -1,4 +1,4 @@
-# The XORGUI Widget Toolkit (For X11)
+# The Xorgui Widget Toolkit (For X11)
 
 A simple and minimalistic widget toolkit for X11, based on Xlib.  
 The aim is to create a small widget toolkit that uses the least resources possible.  
@@ -30,10 +30,8 @@ You can find the binary file inside cmake-build-debug.
 You can also modify src/main.c to test out the library.
 
 ## NOTES:
-- CLion users should press the hammer button instead of the play button to compile.
+- Might also be known as "X or GUI", "X.org UI", "XOR GUI".
 
-## Images
+## Image
 
-Checklist | Radio Button
-:-:|:-:
-![alt text](img/20260905-checklist.png "Checklist") | ![alt text](img/20260905-radiobutton.png)
+![alt text](img/xorgui.png "Xorgui")
