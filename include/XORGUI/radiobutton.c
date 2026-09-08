@@ -1,5 +1,6 @@
 #include "radiobutton.h"
 
+// Possibly redundant and could use drawChecklistFrom() instead
 void drawRadioButtonFrom(Checkbox *entry, int arrayEntriesNumber, Display *dpy, Window win, GC gc, int x, int y,
                          int w, int h, char *checklistTitle, int checkboxHeight) {
     XDrawRectangle(dpy, win, gc, x, y, w, h);

@@ -15,7 +15,7 @@ static void drawElements(Display *display, GC gc, Window win) {
     drawButtonsFrom(buttonsArray, NUMBER_OF_BUTTONS_MAX);
     drawCheckboxesFrom(checkboxesArray, NUMBER_OF_BUTTONS_MAX);
     // NOTE: Hardcoded x and y
-    drawChecklistFrom(checkboxesArray, 5, display, win, gc, 5, 5 + 320, 120, 190, "Radio Button", 60);
+    drawChecklistFrom(checkboxesArray, 5, display, win, gc, 5, 5 + 320, 120, 190, "Checklist", 60);
     drawButtonsFrom(buttonsArray, NUMBER_OF_BUTTONS_MAX);
     drawTextFieldsFrom(textfieldsArray, NUMBER_OF_BUTTONS_MAX);
     drawProgressBar(display, gc, win, 130, 325, 370, 40, 888, 1337);
@@ -31,13 +31,18 @@ static void updateElements(Display *display, GC gc, Window win, XEvent ev) {
     updateTextFieldsFrom(textfieldsArray, (MousePos){ev.xbutton.x, ev.xbutton.y}, NUMBER_OF_BUTTONS_MAX, ks);
 }
 
+// (Example) Make a function that updates keys you want and will be later used as a parameter in update_loop();
+static void updateKeys(Display *display, XEvent ev, KeySym ks, TextField *entry, int arrayEntriesNumber) { // TODO: Remove unused "int arrayEntriesNumber"
+    TextFieldKeyUpdate(display, ev, ks, textfieldsArray, 17);
+}
+
 int main(void) {
     // Boilerplate and declarations
     Display *display = XOpenDisplay(NULL);
     if (!display) { fprintf(stderr, "Cannot open display\n"); }
     int screen = DefaultScreen(display);
     int buttonWidth = 120, buttonHeight = 40, starterX = 5, starterY = 5; // label/button/checkbox stuff
-    Window win = XCreateSimpleWindow(display, RootWindow(display, screen), 0, 0, 1280, 720, 1,
+    Window win = XCreateSimpleWindow(display, RootWindow(display, screen), 0, 0, 800, 600, 1,
                                      BlackPixel(display, screen), WhitePixel(display, screen));
     XMapWindow(display, win); // Maps the window
     XStoreName(display, win, "Xorgui");
@@ -81,7 +86,7 @@ int main(void) {
         checkboxesArray[i].y = starterY + 100;
         checkboxesArray[i].w = buttonWidth;
         checkboxesArray[i].h = buttonHeight;
-        checkboxesArray[i].label = "Checkbox";
+        checkboxesArray[i].label = "Radio Button";
         checkboxesArray[i].drawOutline = true;
         checkboxesArray[i].isChecked = false;
         strcpy(checkboxesArray[i].labelPos, "left"); // NOTE: Maybe a checklist should ignore this?
@@ -90,9 +95,9 @@ int main(void) {
         textfieldsArray[i].display = display;
         textfieldsArray[i].win = win;
         textfieldsArray[i].gc = gc;
-        textfieldsArray[i].x = starterX + (buttonWidth + 5) * i * 4;
+        textfieldsArray[i].x = starterX + (buttonWidth + 5) * i * 3;
         textfieldsArray[i].y = starterY + 150;
-        textfieldsArray[i].w = buttonWidth * 4 + 3 * 5;
+        textfieldsArray[i].w = buttonWidth * 3 + 2 * 5;
         textfieldsArray[i].h = buttonHeight * 4;
         strcpy(textfieldsArray[i].label, "Text Field");
         textfieldsArray[i].drawOutline = true;
@@ -102,6 +107,6 @@ int main(void) {
 
     // This is a loop that checks for key presses and updates
     // To draw or update elements you have to make a function that does so and insert it as a argument
-    update_loop(display, gc, win, ev, drawElements, drawElements, updateElements, ks);
+    update_loop(display, gc, win, ev, drawElements, drawElements, updateElements, updateKeys, ks);
     return 0;
 }

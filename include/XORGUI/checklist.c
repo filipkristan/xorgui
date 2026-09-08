@@ -7,10 +7,6 @@ void drawChecklistFrom(Checkbox *entry, int arrayEntriesNumber, Display *dpy, Wi
     label(dpy, gc, win, x, y, w, checkboxHeight / 3, checklistTitle,false, "center");
     for (int i = 0; i < arrayEntriesNumber; ++i) {
         int y_padding = 30 + checkboxHeight / 2 * i;
-
-        // TODO: IMPROVE DEBUG
-        // XDrawRectangle(entry[i].display,  entry[i].win, entry[i].gc, x, y + y_padding, entry[i].w, entry[i].h);
-
         checkbox(entry[i].display, entry[i].gc, entry[i].win, x, y + y_padding, entry[i].w, entry[i].h / 2,
                  entry[i].label, false, entry[i].isChecked, entry[i].labelPos);
     }
