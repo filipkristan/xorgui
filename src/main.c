@@ -1,13 +1,15 @@
 #include <XORGUI/xorgui.h>
 
-int NUMBER_OF_BUTTONS_MAX = 17;
+KeySym ks;
 
 // Test out setting buttons with an array
+// // NOTE: Demo & hardcoded
+int NUMBER_OF_BUTTONS_MAX = 17;
 Button buttonsArray[17];
 Label labelArray[17];
 Checkbox checkboxesArray[17];
-TextField textfieldsArray[17]; // NOTE: Demo & hardcoded
-KeySym ks;
+TextField textfieldsArray[17];
+Slider sliderArray[2];
 
 // (Example) Make a function that draws everything you want and will be later used as a parameter in update_loop();
 static void drawElements(Display *display, GC gc, Window win) {
@@ -19,20 +21,22 @@ static void drawElements(Display *display, GC gc, Window win) {
     drawButtonsFrom(buttonsArray, NUMBER_OF_BUTTONS_MAX);
     drawTextFieldsFrom(textfieldsArray, NUMBER_OF_BUTTONS_MAX);
     drawProgressBar(display, gc, win, 130, 325, 370, 40, 888, 1337);
+    drawSlidersFrom(sliderArray);
 }
 
 // (Example) Make a function that updates everything you want and will be later used as a parameter in update_loop();
 static void updateElements(Display *display, GC gc, Window win, XEvent ev) {
     updateButtonsFrom(buttonsArray, (MousePos){ev.xbutton.x, ev.xbutton.y}, NUMBER_OF_BUTTONS_MAX);
     updateCheckboxesFrom(checkboxesArray, (MousePos){ev.xbutton.x, ev.xbutton.y}, NUMBER_OF_BUTTONS_MAX);
-    updateChecklistFrom(checkboxesArray, (MousePos){ev.xbutton.x, ev.xbutton.y}, 5, display, win, gc, 5, 5 + 320, 120,
-                        190, 60);
+    updateChecklistFrom(checkboxesArray, (MousePos){ev.xbutton.x, ev.xbutton.y}, 5, display, win, gc, 5, 5 + 320, 120, 190, 60);
     updateButtonsFrom(buttonsArray, (MousePos){ev.xbutton.x, ev.xbutton.y}, NUMBER_OF_BUTTONS_MAX);
     updateTextFieldsFrom(textfieldsArray, (MousePos){ev.xbutton.x, ev.xbutton.y}, NUMBER_OF_BUTTONS_MAX, ks);
+    updateSlider(display, gc, win, 130, 370, 370, 40, 0, 1337, 130, false, (MousePos){ev.xbutton.x, ev.xbutton.y}, sliderArray);
 }
 
 // (Example) Make a function that updates keys you want and will be later used as a parameter in update_loop();
-static void updateKeys(Display *display, XEvent ev, KeySym ks, TextField *entry, int arrayEntriesNumber) { // TODO: Remove unused "int arrayEntriesNumber"
+static void updateKeys(Display *display, XEvent ev, KeySym ks, TextField *entry, int arrayEntriesNumber) {
+    // TODO: Remove unused "int arrayEntriesNumber"
     TextFieldKeyUpdate(display, ev, ks, textfieldsArray, 17);
 }
 
@@ -42,8 +46,7 @@ int main(void) {
     if (!display) { fprintf(stderr, "Cannot open display\n"); }
     int screen = DefaultScreen(display);
     int buttonWidth = 120, buttonHeight = 40, starterX = 5, starterY = 5; // label/button/checkbox stuff
-    Window win = XCreateSimpleWindow(display, RootWindow(display, screen), 0, 0, 800, 600, 1,
-                                     BlackPixel(display, screen), WhitePixel(display, screen));
+    Window win = XCreateSimpleWindow(display, RootWindow(display, screen), 0, 0, 800, 600, 1, BlackPixel(display, screen), WhitePixel(display, screen));
     XMapWindow(display, win); // Maps the window
     XStoreName(display, win, "Xorgui");
     XSelectInput(display, win, ButtonPressMask | ButtonReleaseMask | ExposureMask | KeyPressMask | KeyReleaseMask);
@@ -103,6 +106,19 @@ int main(void) {
         textfieldsArray[i].drawOutline = true;
         textfieldsArray[i].captureInput = false;
         strcpy(textfieldsArray[i].labelPos, "top-left");
+    }
+    for (int i = 0; i < 1; ++i) {
+        sliderArray[i].display = display;
+        sliderArray[i].win = win;
+        sliderArray[i].gc = gc;
+        sliderArray[i].x = 130;
+        sliderArray[i].y = 370;
+        sliderArray[i].w = 370;
+        sliderArray[i].h = 40;
+        sliderArray[i].isSelected = false;
+        sliderArray[i].currentValue = 410;
+        sliderArray[i].maxValue = 1337;
+        sliderArray[i].sliderButtonX = sliderArray[i].x; // Not ideal but will stay like this for now
     }
 
     // This is a loop that checks for key presses and updates

@@ -14,6 +14,8 @@ add_library(xorgui STATIC
         include/XORGUI/checklist.h
         include/XORGUI/checkbox.c
         include/XORGUI/checkbox.h
+        include/XORGUI/slider.c
+        include/XORGUI/slider.h
         include/XORGUI/update.c
         include/XORGUI/update.h
         include/XORGUI/button.c

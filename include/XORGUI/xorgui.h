@@ -5,6 +5,7 @@
 #include "label.h"
 #include "button.h"
 #include "update.h"
+#include "slider.h"
 #include "checkbox.h"
 #include "textfield.h"
 #include "checklist.h"
