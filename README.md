@@ -20,8 +20,7 @@ Progress:
 - [X] Radio button
 - [X] Text field
 - [X] Progress bar
-- [ ] List
-- [ ] Slider
+- [X] Slider
 - [ ] Scrollbar
 
 ## Test out the library
