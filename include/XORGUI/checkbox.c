@@ -7,11 +7,12 @@ void checkbox(Display *display, GC gc, Window win, int x, int y, int w, int h, c
     int squareSize = 16;
     button(display, gc, win, x, y, w, h, labelText, drawOutline, labelPos);
     if (isChecked) {
-        XFillRectangle(display, win, gc, x + w - squareSize - squareSize / 2, y + h / 2 - squareSize / 2, squareSize,
-                       squareSize);
+        // Checkbox black outline
+        XDrawRectangle(display, win, gc, x + w - squareSize - squareSize / 2, y + h / 2 - squareSize / 2, squareSize, squareSize);
+        // Black inner square
+        XFillRectangle(display, win, gc, x + w - squareSize - squareSize / 2 + 2, y + h / 2 - squareSize / 2 + 2, squareSize - 3, squareSize - 3);
     } else {
-        XDrawRectangle(display, win, gc, x + w - squareSize - squareSize / 2, y + h / 2 - squareSize / 2, squareSize,
-                       squareSize);
+        XDrawRectangle(display, win, gc, x + w - squareSize - squareSize / 2, y + h / 2 - squareSize / 2, squareSize, squareSize);
     }
 }
 
