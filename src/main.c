@@ -4,40 +4,39 @@ KeySym ks;
 
 // Test out setting buttons with an array
 // // NOTE: Demo & hardcoded
-int NUMBER_OF_BUTTONS_MAX = 17;
-Button buttonsArray[17];
-Label labelArray[17];
-Checkbox checkboxesArray[17];
-TextField textfieldsArray[17];
+int NUMBER_OF_BUTTONS_MAX = 6;
+Button buttonsArray[6];
+Label labelArray[6];
+Checkbox checkboxesArray[6];
+extern TextField textfieldsArray[2]; // TODO: Unfuck this
 Slider sliderArray[2];
 
 // (Example) Make a function that draws everything you want and will be later used as a parameter in update_loop();
 static void drawElements(Display *display, GC gc, Window win) {
-    drawLabelsFrom(labelArray, NUMBER_OF_BUTTONS_MAX);
-    drawButtonsFrom(buttonsArray, NUMBER_OF_BUTTONS_MAX);
-    drawCheckboxesFrom(checkboxesArray, NUMBER_OF_BUTTONS_MAX);
+    drawLabelsFrom(labelArray, sizeof(labelArray) / sizeof(labelArray[0]));
+    drawButtonsFrom(buttonsArray, sizeof(buttonsArray) / sizeof(buttonsArray[0]));
+    drawCheckboxesFrom(checkboxesArray, sizeof(checkboxesArray) / sizeof(checkboxesArray[0]));
     // NOTE: Hardcoded x and y
     drawChecklistFrom(checkboxesArray, 5, display, win, gc, 5, 5 + 320, 120, 190, "Checklist", 60);
-    drawButtonsFrom(buttonsArray, NUMBER_OF_BUTTONS_MAX);
-    drawTextFieldsFrom(textfieldsArray, NUMBER_OF_BUTTONS_MAX);
+    drawTextFieldsFrom(textfieldsArray, 2); // TODO: fix hardcoded value
     drawProgressBar(display, gc, win, 130, 325, 370, 40, 888, 1337);
     drawSlidersFrom(sliderArray);
 }
 
 // (Example) Make a function that updates everything you want and will be later used as a parameter in update_loop();
 static void updateElements(Display *display, GC gc, Window win, XEvent ev) {
-    updateButtonsFrom(buttonsArray, (MousePos){ev.xbutton.x, ev.xbutton.y}, NUMBER_OF_BUTTONS_MAX);
-    updateCheckboxesFrom(checkboxesArray, (MousePos){ev.xbutton.x, ev.xbutton.y}, NUMBER_OF_BUTTONS_MAX);
+    updateButtonsFrom(buttonsArray, (MousePos){ev.xbutton.x, ev.xbutton.y}, sizeof(buttonsArray) / sizeof(buttonsArray[0]));
+    updateCheckboxesFrom(checkboxesArray, (MousePos){ev.xbutton.x, ev.xbutton.y}, sizeof(checkboxesArray) / sizeof(checkboxesArray[0]));
     updateChecklistFrom(checkboxesArray, (MousePos){ev.xbutton.x, ev.xbutton.y}, 5, display, win, gc, 5, 5 + 320, 120, 190, 60);
-    updateButtonsFrom(buttonsArray, (MousePos){ev.xbutton.x, ev.xbutton.y}, NUMBER_OF_BUTTONS_MAX);
-    updateTextFieldsFrom(textfieldsArray, (MousePos){ev.xbutton.x, ev.xbutton.y}, NUMBER_OF_BUTTONS_MAX, ks);
+    updateButtonsFrom(buttonsArray, (MousePos){ev.xbutton.x, ev.xbutton.y}, sizeof(buttonsArray) / sizeof(buttonsArray[0]));
+    updateTextFieldsFrom(textfieldsArray, (MousePos){ev.xbutton.x, ev.xbutton.y}, 2, ks); // TODO: fix hardcoded value
     updateSlider(display, gc, win, 130, 370, 370, 40, 0, 1337, 130, false, (MousePos){ev.xbutton.x, ev.xbutton.y}, sliderArray);
 }
 
 // (Example) Make a function that updates keys you want and will be later used as a parameter in update_loop();
 static void updateKeys(Display *display, XEvent ev, KeySym ks, TextField *entry, int arrayEntriesNumber) {
     // TODO: Remove unused "int arrayEntriesNumber"
-    TextFieldKeyUpdate(display, ev, ks, textfieldsArray, 17);
+    TextFieldKeyUpdate(display, ev, ks, textfieldsArray, arrayEntriesNumber);
 }
 
 int main(void) {
@@ -94,7 +93,8 @@ int main(void) {
         checkboxesArray[i].isChecked = false;
         strcpy(checkboxesArray[i].labelPos, "left"); // NOTE: Maybe a checklist should ignore this?
     }
-    for (int i = 0; i < NUMBER_OF_BUTTONS_MAX; ++i) {
+    for (int i = 0; i < 2; ++i) {
+        // TODO: fix hardcoded value
         textfieldsArray[i].display = display;
         textfieldsArray[i].win = win;
         textfieldsArray[i].gc = gc;
@@ -108,6 +108,7 @@ int main(void) {
         strcpy(textfieldsArray[i].labelPos, "top-left");
     }
     for (int i = 0; i < 1; ++i) {
+        // TODO: fix hardcoded value
         sliderArray[i].display = display;
         sliderArray[i].win = win;
         sliderArray[i].gc = gc;
