@@ -53,5 +53,6 @@ void updateSlider(Display *display, GC gc, Window win, int x, int y, int w, int 
             // printf("fillWidth: %d \n", slider[i].fillWidth); // NOTE: Debug
             fflush(stdout);
         }
+        XClearWindow(slider[i].display, slider[i].win);
     }
 }
