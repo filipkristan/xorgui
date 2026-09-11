@@ -17,9 +17,9 @@ static void drawElements(Display *display, GC gc, Window win) {
     drawButtonsFrom(buttonsArray, sizeof(buttonsArray) / sizeof(buttonsArray[0]));
     drawCheckboxesFrom(checkboxesArray, sizeof(checkboxesArray) / sizeof(checkboxesArray[0]));
     // NOTE: Hardcoded x and y
-    drawChecklistFrom(checkboxesArray, 5, display, win, gc, 5, 5 + 320, 120, 190, "Checklist", 60);
+    drawChecklistFrom(checkboxesArray, 5, display, win, gc, 5, 5 + 300, 120, 190, "Checklist", 60);
     drawTextFieldsFrom(textfieldsArray, 2); // TODO: fix hardcoded value
-    drawProgressBar(display, gc, win, 130, 325, 370, 40, 888, 1337);
+    drawProgressBar(display, gc, win, 130, 305, 370, 40, 888, 1337);
     drawSlidersFrom(sliderArray);
 }
 
@@ -27,10 +27,10 @@ static void drawElements(Display *display, GC gc, Window win) {
 static void updateElements(Display *display, GC gc, Window win, XEvent ev) {
     updateButtonsFrom(buttonsArray, (MousePos){ev.xbutton.x, ev.xbutton.y}, sizeof(buttonsArray) / sizeof(buttonsArray[0]));
     updateCheckboxesFrom(checkboxesArray, (MousePos){ev.xbutton.x, ev.xbutton.y}, sizeof(checkboxesArray) / sizeof(checkboxesArray[0]));
-    updateChecklistFrom(checkboxesArray, (MousePos){ev.xbutton.x, ev.xbutton.y}, 5, display, win, gc, 5, 5 + 320, 120, 190, 60);
+    updateChecklistFrom(checkboxesArray, (MousePos){ev.xbutton.x, ev.xbutton.y}, 5, display, win, gc, 5, 5 + 300, 120, 190, 60);
     updateButtonsFrom(buttonsArray, (MousePos){ev.xbutton.x, ev.xbutton.y}, sizeof(buttonsArray) / sizeof(buttonsArray[0]));
     updateTextFieldsFrom(textfieldsArray, (MousePos){ev.xbutton.x, ev.xbutton.y}, 2, ks); // TODO: fix hardcoded value
-    updateSlider(display, gc, win, 130, 370, 370, 40, 0, 1337, 130, false, (MousePos){ev.xbutton.x, ev.xbutton.y}, sliderArray);
+    updateSlider(display, gc, win, 130, 350, 370, 40, 0, 1337, 130, false, (MousePos){ev.xbutton.x, ev.xbutton.y}, sliderArray);
 }
 
 // (Example) Make a function that updates keys you want and will be later used as a parameter in update_loop();
@@ -73,7 +73,7 @@ int main(void) {
         buttonsArray[i].win = win;
         buttonsArray[i].gc = gc;
         buttonsArray[i].x = starterX + (buttonWidth + 5) * i;
-        buttonsArray[i].y = starterY + 50;
+        buttonsArray[i].y = starterY + 45;
         buttonsArray[i].w = buttonWidth;
         buttonsArray[i].h = buttonHeight;
         buttonsArray[i].label = "Button";
@@ -85,7 +85,7 @@ int main(void) {
         checkboxesArray[i].win = win;
         checkboxesArray[i].gc = gc;
         checkboxesArray[i].x = starterX + (buttonWidth + 5) * i;
-        checkboxesArray[i].y = starterY + 100;
+        checkboxesArray[i].y = starterY + 90;
         checkboxesArray[i].w = buttonWidth;
         checkboxesArray[i].h = buttonHeight;
         checkboxesArray[i].label = "Radio Button";
@@ -99,7 +99,7 @@ int main(void) {
         textfieldsArray[i].win = win;
         textfieldsArray[i].gc = gc;
         textfieldsArray[i].x = starterX + (buttonWidth + 5) * i * 3;
-        textfieldsArray[i].y = starterY + 150;
+        textfieldsArray[i].y = starterY + 135;
         textfieldsArray[i].w = buttonWidth * 3 + 2 * 5;
         textfieldsArray[i].h = buttonHeight * 4;
         strcpy(textfieldsArray[i].label, "Text Field");
@@ -113,7 +113,7 @@ int main(void) {
         sliderArray[i].win = win;
         sliderArray[i].gc = gc;
         sliderArray[i].x = 130;
-        sliderArray[i].y = 370;
+        sliderArray[i].y = 350;
         sliderArray[i].w = 370;
         sliderArray[i].h = 40;
         sliderArray[i].isSelected = false;
