@@ -1,3 +1,4 @@
+#include <pthread.h>
 #include <XORGUI/xorgui.h>
 
 KeySym ks;
@@ -37,6 +38,28 @@ static void updateElements(Display *display, GC gc, Window win, XEvent ev) {
 static void updateKeys(Display *display, XEvent ev, KeySym ks, TextField *entry, int arrayEntriesNumber) {
     // TODO: Remove unused "int arrayEntriesNumber"
     TextFieldKeyUpdate(display, ev, ks, textfieldsArray, arrayEntriesNumber);
+}
+
+char *returnTime(char *out, size_t size) {
+    time_t now = time(NULL);
+    struct tm *t = localtime(&now);
+    strftime(out, size, "%H:%M:%S %p", t);
+    fflush(stdout);
+}
+
+static void *returnTimeThreadFunction(void *arg) {
+    for (;;) {
+        char buffer[100];
+        returnTime(buffer, sizeof(buffer));
+        printf("The current time: %s\n", buffer);
+        sleep(1);
+    }
+    return NULL;
+}
+
+static void updateWithoutUpdate() {
+    pthread_t thread;
+    pthread_create(&thread, NULL, returnTimeThreadFunction, NULL);
 }
 
 int main(void) {
@@ -124,6 +147,6 @@ int main(void) {
 
     // This is a loop that checks for key presses and updates
     // To draw or update elements you have to make a function that does so and insert it as a argument
-    update_loop(display, gc, win, ev, drawElements, drawElements, updateElements, updateKeys, ks);
+    update_loop(display, gc, win, ev, drawElements, drawElements, updateElements, updateWithoutUpdate, updateKeys, ks);
     return 0;
 }
